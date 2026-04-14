@@ -6,7 +6,7 @@
     "email": "alex.johnson@email.com",
     "days_since_contact": 10,
     "status": "almost due",
-    "tags": ["college", "close friend"],
+    "tags": ["FRIEND"],
     "bio": "University friend. We studied together and played football.",
     "goal": 14,
     "next_due_date": "2026-04-20"
@@ -18,7 +18,7 @@
     "email": "sarah.khan@email.com",
     "days_since_contact": 3,
     "status": "on-track",
-    "tags": ["work", "best friend"],
+    "tags": ["COLLEAGUE"],
     "bio": "Colleague and close friend. Work together on projects.",
     "goal": 10,
     "next_due_date": "2026-04-18"
@@ -30,7 +30,7 @@
     "email": "rahim.uddin@email.com",
     "days_since_contact": 25,
     "status": "overdue",
-    "tags": ["school", "old friend"],
+    "tags": ["OLD FRIEND"],
     "bio": "School friend. Lost contact after graduation.",
     "goal": 20,
     "next_due_date": "2026-04-10"
@@ -42,7 +42,7 @@
     "email": "nusrat.jahan@email.com",
     "days_since_contact": 7,
     "status": "on-track",
-    "tags": ["university", "travel buddy"],
+    "tags": ["FRIEND"],
     "bio": "University friend who loves traveling.",
     "goal": 12,
     "next_due_date": "2026-04-22"
@@ -54,7 +54,7 @@
     "email": "imran.hossain@email.com",
     "days_since_contact": 15,
     "status": "almost due",
-    "tags": ["gym", "friend"],
+    "tags": ["FRIEND"],
     "bio": "Gym buddy and motivation partner.",
     "goal": 14,
     "next_due_date": "2026-04-25"
@@ -66,7 +66,7 @@
     "email": "mitu.akter@email.com",
     "days_since_contact": 1,
     "status": "on-track",
-    "tags": ["family", "close"],
+    "tags": ["BESTFRIEND"],
     "bio": "Family friend since childhood.",
     "goal": 7,
     "next_due_date": "2026-04-15"
@@ -78,7 +78,7 @@
     "email": "tanvir.ahmed@email.com",
     "days_since_contact": 18,
     "status": "almost due",
-    "tags": ["college", "project mate"],
+    "tags": ["COLLEGE", "PROJECT MATE"],
     "bio": "College friend, worked on many projects together.",
     "goal": 15,
     "next_due_date": "2026-04-28"
@@ -90,7 +90,7 @@
     "email": "rafiq.hasan@email.com",
     "days_since_contact": 30,
     "status": "overdue",
-    "tags": ["school", "old friend"],
+    "tags": ["SCHOOL", "OLD FRIEND"],
     "bio": "Very old school friend, lost contact.",
     "goal": 20,
     "next_due_date": "2026-04-05"
@@ -102,7 +102,7 @@
     "email": "jannatul.ferdous@email.com",
     "days_since_contact": 5,
     "status": "on-track",
-    "tags": ["work", "colleague"],
+    "tags": ["COLLEAGUE"],
     "bio": "Office colleague and project partner.",
     "goal": 10,
     "next_due_date": "2026-04-19"
@@ -114,7 +114,7 @@
     "email": "shakil.mia@email.com",
     "days_since_contact": 12,
     "status": "almost due",
-    "tags": ["gaming", "friend"],
+    "tags": ["GAMING", "FRIEND"],
     "bio": "Gaming buddy, play online games together.",
     "goal": 14,
     "next_due_date": "2026-04-23"
@@ -127,7 +127,7 @@
     "email": "mehedi.hasan@email.com",
     "days_since_contact": 2,
     "status": "on-track",
-    "tags": ["developer", "work"],
+    "tags": ["FRIEND"],
     "bio": "Developer friend, work on coding projects together.",
     "goal": 10,
     "next_due_date": "2026-04-21"
@@ -139,7 +139,7 @@
     "email": "tania.sultana@email.com",
     "days_since_contact": 9,
     "status": "almost due",
-    "tags": ["university", "friend"],
+    "tags": ["UNIVERSITY", "FRIEND"],
     "bio": "University friend and study partner.",
     "goal": 12,
     "next_due_date": "2026-04-26"

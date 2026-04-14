@@ -12,7 +12,9 @@ function FriendCard({ friend }) {
 
   return (
     <div
-      onClick={() => navigate(`/friend/${friend.id}`)}
+      onClick={() =>
+        navigate(`/friend/${friend.id}`, { state: friend })
+      }
       className="bg-white rounded-2xl p-6 text-center 
                  shadow-sm hover:shadow-lg 
                  transition-all duration-300 cursor-pointer"
