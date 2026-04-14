@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import FriendDetails from "./pages/FriendDetails";
 import Timeline from "./components/Timeline";
+import FriendshipAnalytics from "./components/FriendshipAnalytics";
 
 //  Toast notification import
 import { ToastContainer } from "react-toastify";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/friend/:id" element={<FriendDetails />} />
         <Route path="/timeline" element={<Timeline />} />
+        <Route path="/stats" element={<FriendshipAnalytics />} />
       </Routes>
 
       <Footer />
