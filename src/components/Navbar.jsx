@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <nav className="flex justify-between items-center px-6 py-4 bg-white shadow-md">
 
-      {/* Logo Image */}
+      {/* Logo */}
       <img src={logo} alt="logo" className="h-10 w-auto" />
 
       {/* Menu */}
@@ -16,7 +16,7 @@ function Navbar() {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 bg-green-900 text-white px-4 py-2 rounded-lg shadow-md"
+              ? "flex items-center gap-2 bg-green-900 text-white px-4 py-2 rounded-lg"
               : "flex items-center gap-2 text-gray-700 hover:text-green-600 px-3 py-2"
           }
         >
@@ -28,7 +28,7 @@ function Navbar() {
           to="/timeline"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 bg-green-900 text-white px-4 py-2 rounded-lg shadow-md"
+              ? "flex items-center gap-2 bg-green-900 text-white px-4 py-2 rounded-lg"
               : "flex items-center gap-2 text-gray-700 hover:text-green-600 px-3 py-2"
           }
         >
@@ -40,7 +40,7 @@ function Navbar() {
           to="/stats"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 bg-green-900 text-white px-4 py-2 rounded-lg shadow-md"
+              ? "flex items-center gap-2 bg-green-900 text-white px-4 py-2 rounded-lg"
               : "flex items-center gap-2 text-gray-700 hover:text-green-600 px-3 py-2"
           }
         >

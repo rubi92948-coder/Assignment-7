@@ -6,7 +6,7 @@ import callIcon from "../assets/call.png";
 import messageIcon from "../assets/text.png";
 import videoIcon from "../assets/video.png";
 
-// other icons
+// icons
 import { FiBell, FiArchive, FiTrash2 } from "react-icons/fi";
 
 function FriendDetail() {
@@ -15,6 +15,11 @@ function FriendDetail() {
 
   const [friend, setFriend] = useState(state ?? null);
   const [loading, setLoading] = useState(!state);
+
+  // ✅ timeline state (FIXED)
+  const [timeline, setTimeline] = useState(() => {
+    return JSON.parse(localStorage.getItem("timeline")) || [];
+  });
 
   useEffect(() => {
     if (!state) {
@@ -27,13 +32,34 @@ function FriendDetail() {
         })
         .catch(() => setLoading(false));
     }
-  }, [id]);
+  }, [id, state]);
 
+  // next due calculator
   const getNextDue = (days) => {
-    const today = new Date();
-    const nextDate = new Date();
-    nextDate.setDate(today.getDate() + days);
-    return nextDate.toDateString();
+    const date = new Date();
+    date.setDate(date.getDate() + Number(days || 30));
+    return date.toDateString();
+  };
+
+  // ADD TO TIMELINE
+  const addToTimeline = (type) => {
+    if (!friend) return;
+
+    const newItem = {
+      id: Date.now(),
+      type,
+      person: friend.name,
+      date: new Date().toDateString(),
+      icon:
+        type === "Call" ? "📞" :
+        type === "Text" ? "💬" :
+        "🎥",
+    };
+
+    const updated = [newItem, ...timeline];
+
+    setTimeline(updated);
+    localStorage.setItem("timeline", JSON.stringify(updated));
   };
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
@@ -41,77 +67,56 @@ function FriendDetail() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-6">
 
         {/* LEFT SIDE */}
         <div className="w-full md:w-1/3 flex flex-col gap-4">
 
           {/* INFO CARD */}
-          <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+          <div className="bg-white p-6 rounded-2xl shadow-md text-center">
 
             <img
               src={friend.picture || "/default-avatar.png"}
               alt={friend.name}
-              className="w-24 h-24 rounded-full bg-gray-200"
+              className="w-24 h-24 mx-auto rounded-full"
             />
 
-            <h1 className="mt-4 text-xl font-bold">
-              {friend.name}
-            </h1>
+            <h1 className="mt-4 text-xl font-bold">{friend.name}</h1>
 
-            {/* STATUS */}
             <div className="flex flex-col gap-2 mt-3 items-center">
-
               <span className="bg-red-100 text-red-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase">
                 Overdue
               </span>
-
               <span className="bg-green-100 text-green-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase">
                 Family
               </span>
-
             </div>
 
-            {/* BIO */}
             <p className="text-sm text-gray-600 mt-3">
               {friend.bio || "University friend and study partner."}
             </p>
 
-            {/* NOTES */}
-            {friend.notes && (
-              <p className="text-sm text-gray-500 italic mt-2">
-                "{friend.notes}"
-              </p>
-            )}
-
-            <p className="text-xs text-gray-400 mt-2">
-              Preferred: {friend.preferred || "email"}
-            </p>
-
           </div>
 
-          {/* ACTION CARD */}
+          {/* ACTION */}
           <div className="bg-white p-4 rounded-2xl shadow-md space-y-3">
-
-            <button className="w-full flex items-center justify-center gap-2 py-2 border rounded-lg text-sm hover:bg-gray-50 transition">
+            <button className="w-full flex items-center justify-center gap-2 py-2 border rounded-lg text-sm">
               <FiBell /> Snooze 2 Weeks
             </button>
 
-            <button className="w-full flex items-center justify-center gap-2 py-2 border rounded-lg text-sm hover:bg-gray-50 transition">
+            <button className="w-full flex items-center justify-center gap-2 py-2 border rounded-lg text-sm">
               <FiArchive /> Archive
             </button>
 
-            <button className="w-full flex items-center justify-center gap-2 py-2 border rounded-lg text-sm text-red-500 hover:bg-red-50 transition">
+            <button className="w-full flex items-center justify-center gap-2 py-2 border rounded-lg text-sm text-red-500">
               <FiTrash2 /> Delete
             </button>
-
           </div>
 
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex-1 bg-white p-6 rounded-2xl shadow-md">
+        <div className="flex-1 space-y-6">
 
           {/* STATS */}
           <div className="grid grid-cols-3 gap-4">
@@ -120,66 +125,63 @@ function FriendDetail() {
               { label: "Goal (Days)", val: friend.goal || 30 },
               { label: "Next Due", val: getNextDue(friend.goal || 30) }
             ].map((stat, i) => (
-              <div key={i} className="bg-gray-50 p-4 rounded-xl text-center shadow-sm">
-                <p className="text-2xl font-bold text-gray-800">{stat.val}</p>
-                <p className="text-[10px] text-gray-500 uppercase">{stat.label}</p>
+              <div key={i} className="bg-white p-4 rounded-xl text-center shadow-sm">
+                <p className="text-2xl font-bold">{stat.val}</p>
+                <p className="text-xs text-gray-500 uppercase">{stat.label}</p>
               </div>
             ))}
           </div>
 
-          {/* GOAL */}
-          <div className="mt-6 bg-gray-50 p-4 rounded-xl flex justify-between items-center shadow-sm">
-            <div>
-              <p className="font-bold text-sm">Relationship Goal</p>
-              <p className="text-xs text-gray-500">
-                Connect every {friend.goal || 30} days
-              </p>
-            </div>
-            <button className="text-xs border px-4 py-1 rounded hover:bg-gray-100 transition">
-              Edit
-            </button>
-          </div>
-
-          {/* QUICK CHECK-IN (ASSETS ICONS) */}
-          <div className="mt-6">
+          {/* QUICK CHECK-IN */}
+          <div>
             <h3 className="font-bold text-sm mb-3">Quick Check-In</h3>
 
             <div className="grid grid-cols-3 gap-4">
 
-              <button className="bg-gray-50 p-4 rounded-xl flex flex-col items-center gap-2 shadow-sm hover:shadow-md transition">
-                <img src={callIcon} alt="Call" className="w-6 h-6" />
-                <span className="text-sm">Call</span>
+              <button
+                onClick={() => addToTimeline("Call")}
+                className="bg-white p-4 rounded-xl text-center shadow-sm"
+              >
+                <img src={callIcon} className="w-6 mx-auto" />
+                <p className="text-sm mt-2">Call</p>
               </button>
 
-              <button className="bg-gray-50 p-4 rounded-xl flex flex-col items-center gap-2 shadow-sm hover:shadow-md transition">
-                <img src={messageIcon} alt="Text" className="w-6 h-6" />
-                <span className="text-sm">Text</span>
+              <button
+                onClick={() => addToTimeline("Text")}
+                className="bg-white p-4 rounded-xl text-center shadow-sm"
+              >
+                <img src={messageIcon} className="w-6 mx-auto" />
+                <p className="text-sm mt-2">Text</p>
               </button>
 
-              <button className="bg-gray-50 p-4 rounded-xl flex flex-col items-center gap-2 shadow-sm hover:shadow-md transition">
-                <img src={videoIcon} alt="Video" className="w-6 h-6" />
-                <span className="text-sm">Video</span>
+              <button
+                onClick={() => addToTimeline("Video")}
+                className="bg-white p-4 rounded-xl text-center shadow-sm"
+              >
+                <img src={videoIcon} className="w-6 mx-auto" />
+                <p className="text-sm mt-2">Video</p>
               </button>
 
             </div>
           </div>
 
           {/* RECENT */}
-          <div className="mt-6">
+          <div>
             <h3 className="font-bold text-sm mb-3">Recent Interactions</h3>
 
             <div className="space-y-3">
-              {[1, 2, 3].map((_, i) => (
-                <div key={i} className="flex justify-between items-center text-sm bg-gray-50 p-3 rounded-lg shadow-sm">
-                  <p>💬 Asked for career advice</p>
-                  <span className="text-gray-400 text-xs">Jan 28, 2026</span>
+              {timeline.slice(0, 3).map((item) => (
+                <div key={item.id} className="bg-white p-3 rounded-lg shadow-sm flex justify-between">
+                  <p className="text-sm">
+                    {item.icon} {item.type} with {item.person}
+                  </p>
+                  <span className="text-xs text-gray-400">{item.date}</span>
                 </div>
               ))}
             </div>
           </div>
 
         </div>
-
       </div>
     </div>
   );
