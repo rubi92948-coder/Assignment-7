@@ -9,6 +9,9 @@ import videoIcon from "../assets/video.png";
 // icons
 import { FiBell, FiArchive, FiTrash2 } from "react-icons/fi";
 
+//  toast notification
+import { toast } from "react-toastify";
+
 function FriendDetail() {
   const { id } = useParams();
   const { state } = useLocation();
@@ -16,7 +19,7 @@ function FriendDetail() {
   const [friend, setFriend] = useState(state ?? null);
   const [loading, setLoading] = useState(!state);
 
-  // ✅ timeline state (FIXED)
+  // timeline state
   const [timeline, setTimeline] = useState(() => {
     return JSON.parse(localStorage.getItem("timeline")) || [];
   });
@@ -41,7 +44,7 @@ function FriendDetail() {
     return date.toDateString();
   };
 
-  // ADD TO TIMELINE
+  // ADD TO TIMELINE + NOTIFICATION
   const addToTimeline = (type) => {
     if (!friend) return;
 
@@ -51,15 +54,20 @@ function FriendDetail() {
       person: friend.name,
       date: new Date().toDateString(),
       icon:
-        type === "Call" ? "📞" :
-        type === "Text" ? "💬" :
-        "🎥",
+        type === "Call"
+          ? "📞"
+          : type === "Text"
+          ? "💬"
+          : "🎥",
     };
 
     const updated = [newItem, ...timeline];
 
     setTimeline(updated);
     localStorage.setItem("timeline", JSON.stringify(updated));
+
+    // Toast notification
+    toast.success(`${type} sent to ${friend.name}`);
   };
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
