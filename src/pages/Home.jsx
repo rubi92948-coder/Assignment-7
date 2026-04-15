@@ -80,10 +80,7 @@ function Home() {
       <div className="mb-8">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
           Your Friends
-        </h2>
-        <p className="text-gray-500 mt-2 text-sm md:text-base">
-          Keep track of your important friendships and stay connected.
-        </p>
+        </h2>        
       </div>
 
       {/* Friends Grid */}

@@ -7,9 +7,9 @@ import messageIcon from "../assets/text.png";
 import videoIcon from "../assets/video.png";
 
 // icons
-import { FiBell, FiArchive, FiTrash2 } from "react-icons/fi";
+import { FiBell, FiArchive, FiTrash2, FiEdit3 } from "react-icons/fi";
 
-//  toast notification
+// toast notification
 import { toast } from "react-toastify";
 
 function FriendDetail() {
@@ -19,7 +19,6 @@ function FriendDetail() {
   const [friend, setFriend] = useState(state ?? null);
   const [loading, setLoading] = useState(!state);
 
-  // timeline state
   const [timeline, setTimeline] = useState(() => {
     return JSON.parse(localStorage.getItem("timeline")) || [];
   });
@@ -37,14 +36,12 @@ function FriendDetail() {
     }
   }, [id, state]);
 
-  // next due calculator
   const getNextDue = (days) => {
     const date = new Date();
     date.setDate(date.getDate() + Number(days || 30));
     return date.toDateString();
   };
 
-  // ADD TO TIMELINE + NOTIFICATION
   const addToTimeline = (type) => {
     if (!friend) return;
 
@@ -66,7 +63,6 @@ function FriendDetail() {
     setTimeline(updated);
     localStorage.setItem("timeline", JSON.stringify(updated));
 
-    // Toast notification
     toast.success(`${type} sent to ${friend.name}`);
   };
 
@@ -89,21 +85,21 @@ function FriendDetail() {
               className="w-24 h-24 mx-auto rounded-full"
             />
 
-            <h1 className="mt-4 text-xl font-bold">{friend.name}</h1>
+            <h1 className="mt-4 text-xl font-bold">{friend.name}</h1>            
 
             <div className="flex flex-col gap-2 mt-3 items-center">
               <span className="bg-red-100 text-red-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase">
                 Overdue
               </span>
               <span className="bg-green-100 text-green-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                Family
-              </span>
+                Family                 
+              </span>              
             </div>
 
             <p className="text-sm text-gray-600 mt-3">
               {friend.bio || "University friend and study partner."}
             </p>
-
+            <p className="text-sm text-gray-500 mt-1">{friend.email}</p>
           </div>
 
           {/* ACTION */}
@@ -120,7 +116,6 @@ function FriendDetail() {
               <FiTrash2 /> Delete
             </button>
           </div>
-
         </div>
 
         {/* RIGHT SIDE */}
@@ -140,38 +135,55 @@ function FriendDetail() {
             ))}
           </div>
 
-          {/* QUICK CHECK-IN */}
-          <div>
-            <h3 className="font-bold text-sm mb-3">Quick Check-In</h3>
+         {/* GOAL CARD */}
+<div className="bg-white p-5 rounded-xl shadow-sm">
+  <div className="flex justify-between items-center">
+    <h3 className="font-bold text-gray-800">
+      Relationship Goal
+    </h3>
 
-            <div className="grid grid-cols-3 gap-4">
+    <button className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+  Edit
+</button>
+  </div>
 
-              <button
-                onClick={() => addToTimeline("Call")}
-                className="bg-white p-4 rounded-xl text-center shadow-sm"
-              >
-                <img src={callIcon} className="w-6 mx-auto" />
-                <p className="text-sm mt-2">Call</p>
-              </button>
+  <p className="text-gray-500 text-sm mt-2">
+    Current goal: {friend.goal || 30} days
+  </p>
+</div>
 
-              <button
-                onClick={() => addToTimeline("Text")}
-                className="bg-white p-4 rounded-xl text-center shadow-sm"
-              >
-                <img src={messageIcon} className="w-6 mx-auto" />
-                <p className="text-sm mt-2">Text</p>
-              </button>
+          {/* QUICK CHECK-IN CARD */}
+<div className="bg-white p-5 rounded-xl shadow-sm">
+  <h3 className="font-bold text-sm mb-4">Quick Check-In</h3>
 
-              <button
-                onClick={() => addToTimeline("Video")}
-                className="bg-white p-4 rounded-xl text-center shadow-sm"
-              >
-                <img src={videoIcon} className="w-6 mx-auto" />
-                <p className="text-sm mt-2">Video</p>
-              </button>
+  <div className="grid grid-cols-3 gap-4">
 
-            </div>
-          </div>
+    <button
+      onClick={() => addToTimeline("Call")}
+      className="flex flex-col items-center justify-center py-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition"
+    >
+      <img src={callIcon} className="w-6" />
+      <p className="text-sm mt-2">Call</p>
+    </button>
+
+    <button
+      onClick={() => addToTimeline("Text")}
+      className="flex flex-col items-center justify-center py-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition"
+    >
+      <img src={messageIcon} className="w-6" />
+      <p className="text-sm mt-2">Text</p>
+    </button>
+
+    <button
+      onClick={() => addToTimeline("Video")}
+      className="flex flex-col items-center justify-center py-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition"
+    >
+      <img src={videoIcon} className="w-6" />
+      <p className="text-sm mt-2">Video</p>
+    </button>
+
+  </div>
+</div>
 
           {/* RECENT */}
           <div>
@@ -179,7 +191,10 @@ function FriendDetail() {
 
             <div className="space-y-3">
               {timeline.slice(0, 3).map((item) => (
-                <div key={item.id} className="bg-white p-3 rounded-lg shadow-sm flex justify-between">
+                <div
+                  key={item.id}
+                  className="bg-white p-3 rounded-lg shadow-sm flex justify-between"
+                >
                   <p className="text-sm">
                     {item.icon} {item.type} with {item.person}
                   </p>
