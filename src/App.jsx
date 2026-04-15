@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import FriendDetails from "./pages/FriendDetails";
-import Timeline from "./components/TimeLine";
+import Timeline from "./components/Timeline";
 import FriendshipAnalytics from "./components/FriendshipAnalytics";
 import NotFound from "./pages/NotFound";
 
@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/friend/:id" element={<FriendDetails />} />
-        <Route path="/timeline" element={<TimeLine />} />
+        <Route path="/timeline" element={<Timeline />} />
         <Route path="/stats" element={<FriendshipAnalytics />} />
 
         {/* 404 Page */}
