@@ -25,6 +25,12 @@ The app helps users stay connected with important people in their lives by showi
 
 ---
 
+##  Live Demo
+
+👉 https://assignment-7-six-ebon.vercel.app
+
+---
+
 ## Key Features
 
 * Responsive design for mobile, tablet, and desktop devices
