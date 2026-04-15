@@ -6,8 +6,9 @@ import Footer from "./components/Footer";
 import FriendDetails from "./pages/FriendDetails";
 import Timeline from "./components/Timeline";
 import FriendshipAnalytics from "./components/FriendshipAnalytics";
+import NotFound from "./pages/NotFound";
 
-//  Toast notification import
+// Toast notification import
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,11 +22,14 @@ function App() {
         <Route path="/friend/:id" element={<FriendDetails />} />
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/stats" element={<FriendshipAnalytics />} />
+
+        {/* 404 Page */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />
 
-      {/* Global Toast Container  */}
+      {/* Global Toast Container */}
       <ToastContainer
         position="top-right"
         autoClose={2000}
