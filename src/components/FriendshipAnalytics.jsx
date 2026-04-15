@@ -18,14 +18,14 @@ const FriendshipAnalytics = () => {
         data: stats.map((s) => s.value),
         backgroundColor: stats.map((s) => s.color),
         borderWidth: 0,
-        spacing: 5,       // gap between colors
-        borderRadius: 10, // smooth edges
+        spacing: 5,       
+        borderRadius: 10, 
       },
     ],
   };
 
   const options = {
-    cutout: "72%", // ✅ balanced thickness (NOT too thin, NOT too thick)
+    cutout: "72%",
     plugins: {
       legend: {
         display: false,

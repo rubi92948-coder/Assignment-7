@@ -33,7 +33,7 @@ function Navbar() {
           }
         >
           <FaClock />
-          Timeline
+          TimeLine
         </NavLink>
 
         <NavLink
